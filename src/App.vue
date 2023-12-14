@@ -67,6 +67,7 @@ const onSubmit = (data) => {
 
           <hr />
 
+          <FormKit type="q-time" name="time1" />
           <FormKit type="q-date" name="date1" />
           <hr />
 
