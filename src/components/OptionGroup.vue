@@ -12,17 +12,25 @@ const props = defineProps({
 
 let error = ref(false);
 let errorMessage = ref(null);
-function showErrorMessage() {
-    const messages = getValidationMessages(props.context.node);//Map
+function showErrorMessage(msg) {
+    if (msg.name == "message-updated") {
+        if (msg.payload.type == "validation") {
+            errorMessage.value = msg.payload.value;
+        }
+    }
 
-    const first = messages.entries().next().value;
-    if (first) {
-        const msg = first[1];
-        error.value = true;
-        errorMessage.value = msg[0].value;
-    } else {
-        error.value = false;
-        errorMessage.value = null;
+    if (msg.name == "message-removed") {
+        if (msg.payload.type == "validation") {
+            errorMessage.value = "";
+            error.value = false;
+        }
+    }
+
+    if (msg.name == "message-added") {
+        if (msg.payload.type == "validation") {
+            errorMessage.value = msg.payload.value;
+            error.value = true;
+        }
     }
 }
 

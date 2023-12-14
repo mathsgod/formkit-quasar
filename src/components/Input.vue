@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { getValidationMessages } from "@formkit/validation"
+import { isForOfStatement, isIfStatement } from 'typescript';
 const props = defineProps({
     modelValue: String,
     context: Object
@@ -8,17 +9,26 @@ const props = defineProps({
 
 let error = ref(false);
 let errorMessage = ref(null);
-function showErrorMessage() {
-    const messages = getValidationMessages(props.context.node);//Map
 
-    const first = messages.entries().next().value;
-    if (first) {
-        const msg = first[1];
-        error.value = true;
-        errorMessage.value = msg[0].value;
-    } else {
-        error.value = false;
-        errorMessage.value = null;
+function showErrorMessage(msg) {
+    if (msg.name == "message-updated") {
+        if (msg.payload.type == "validation") {
+            errorMessage.value = msg.payload.value;
+        }
+    }
+
+    if (msg.name == "message-removed") {
+        if (msg.payload.type == "validation") {
+            errorMessage.value = "";
+            error.value = false;
+        }
+    }
+
+    if (msg.name == "message-added") {
+        if (msg.payload.type == "validation") {
+            errorMessage.value = msg.payload.value;
+            error.value = true;
+        }
     }
 }
 
@@ -31,9 +41,13 @@ props.context.node.on("message-added", showErrorMessage);
 props.context.node.on("message-removed", showErrorMessage);
 props.context.node.on("message-updated", showErrorMessage);
 
+props.context.node.on("settled", function () {
+    console.log("settled");
+})
+
 
 </script>
 <template>
-    <q-input v-model="value" :label="context.label" v-bind="context.attrs" :error="error"
+    <q-input v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :type="context.inputType"
         :error-message="errorMessage"></q-input>
 </template>

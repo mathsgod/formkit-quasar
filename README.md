@@ -41,7 +41,11 @@ app.mount('#app')
 
 ```html
 
-<FormKit type="q-input" label="Input" name="input" validation="required"></FormKit>
+<FormKit type="q-input" label="Input" name="input" validation="required">
+    
+</FormKit>
+
+<FormKit type="q-input" label="Password" name="password1" input-type="password"></FormKit>
 
 <FormKit type="q-select" label="Select" name="select1" validation="required" :options="[
    'Monaco',

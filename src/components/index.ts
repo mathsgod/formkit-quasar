@@ -26,6 +26,7 @@ export const createQuasarPlugin = (): FormKitPlugin => {
             case "q-input":
                 return node.define({
                     type: "input",
+                    props: ["inputType"],
                     component: Input
                 });
             case "q-textarea":
