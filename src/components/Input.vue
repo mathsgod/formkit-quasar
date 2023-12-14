@@ -39,11 +39,6 @@ props.context.node.on("message-added", showErrorMessage);
 props.context.node.on("message-removed", showErrorMessage);
 props.context.node.on("message-updated", showErrorMessage);
 
-props.context.node.on("settled", function () {
-    console.log("settled");
-})
-
-
 </script>
 <template>
     <q-input v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :type="context.inputType"
