@@ -12,7 +12,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', '@formkit/vue', 'quasar'],
+      external: ['vue', '@formkit/vue', 'quasar', "@quasar/extras", "@formkit/validation"],
       output: {
         globals: {
           vue: 'Vue',
