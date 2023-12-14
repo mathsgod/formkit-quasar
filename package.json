@@ -14,10 +14,10 @@
   "dependencies": {
     "vue": "^3.2.47",
     "quasar": "^2.14.1",
-    "@formkit/vue": "^1.4.0"
+    "@formkit/vue": "^1.4.0",
+    "@quasar/extras": "^1.16.9"
   },
   "devDependencies": {
-    "@quasar/extras": "^1.16.9",
     "@vitejs/plugin-vue": "^4.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.0",
