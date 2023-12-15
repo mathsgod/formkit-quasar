@@ -21,7 +21,7 @@ import 'quasar/dist/quasar.prod.css'
 
 const app = createApp(App);
 
-import { createQuasarPlugin } from "./components";
+import { createQuasarPlugin } from "formkit-quasar";
 import { plugin, defaultConfig } from '@formkit/vue'
 
 app.use(Quasar, {
