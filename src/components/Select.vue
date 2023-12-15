@@ -1,5 +1,6 @@
 <script setup>
-import { computed, ref } from 'vue'
+import registerErrorMessage from '../utils/registerErrorMessage';
+import { computed, ref, useSlots } from 'vue'
 const props = defineProps({
     modelValue: String,
     context: Object
@@ -7,40 +8,21 @@ const props = defineProps({
 
 let error = ref(false);
 let errorMessage = ref(null);
-function showErrorMessage(msg) {
-    if (msg.name == "message-updated") {
-        if (msg.payload.type == "validation") {
-            errorMessage.value = msg.payload.value;
-        }
-    }
 
-    if (msg.name == "message-removed") {
-        if (msg.payload.type == "validation") {
-            errorMessage.value = "";
-            error.value = false;
-        }
-    }
+registerErrorMessage(props.context.node, error, errorMessage);
 
-    if (msg.name == "message-added") {
-        if (msg.payload.type == "validation") {
-            errorMessage.value = msg.payload.value;
-            error.value = true;
-        }
-    }
-}
+const slots = useSlots();
 
 const value = computed({
     get: () => props.context.value,
     set: (val) => props.context.node.input(val)
 })
 
-props.context.node.on("message-added", showErrorMessage);
-props.context.node.on("message-removed", showErrorMessage);
-props.context.node.on("message-updated", showErrorMessage);
-
-
 </script>
 <template>
-    <q-select v-model="value" :label="context.label" v-bind="context.attrs" :error="error"
-        :error-message="errorMessage"></q-select>
+    <q-select v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :error-message="errorMessage">
+        <template v-for="s in ss" v-slot:[s]="props" :key="s">
+            <slot :name="s" v-bind="props ?? {}"></slot>
+        </template>
+    </q-select>
 </template>
