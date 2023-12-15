@@ -18,7 +18,6 @@ const value = computed({
     get: () => props.context.value,
     set: (val) => props.context.node.input(val)
 })
-
 </script>
 <template>
     <q-option-group v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :type="context.optionType"
