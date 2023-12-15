@@ -2,7 +2,6 @@
 import registerErrorMessage from '../utils/registerErrorMessage';
 import { computed, ref, useSlots } from 'vue'
 const props = defineProps({
-    modelValue: String,
     context: Object
 });
 
@@ -11,12 +10,14 @@ let errorMessage = ref(null);
 
 registerErrorMessage(props.context.node, error, errorMessage);
 
-const slots = useSlots();
-
 const value = computed({
     get: () => props.context.value,
     set: (val) => props.context.node.input(val)
 })
+
+const ss = Object.entries(useSlots()).map(([key, value]) => {
+    return key;
+});
 
 </script>
 <template>

@@ -1,49 +1,30 @@
 <script setup>
-import { computed, ref } from 'vue'
+import registerErrorMessage from '../utils/registerErrorMessage';
+import { computed, ref, useSlots } from 'vue'
 const props = defineProps({
-    modelValue: String,
-    context: Object,
-    optionType: {
-        type: String,
-        default: "radio"
-    }
+    context: Object
 });
 
 let error = ref(false);
 let errorMessage = ref(null);
-function showErrorMessage(msg) {
-    if (msg.name == "message-updated") {
-        if (msg.payload.type == "validation") {
-            errorMessage.value = msg.payload.value;
-        }
-    }
 
-    if (msg.name == "message-removed") {
-        if (msg.payload.type == "validation") {
-            errorMessage.value = "";
-            error.value = false;
-        }
-    }
+registerErrorMessage(props.context.node, error, errorMessage);
 
-    if (msg.name == "message-added") {
-        if (msg.payload.type == "validation") {
-            errorMessage.value = msg.payload.value;
-            error.value = true;
-        }
-    }
-}
+const ss = Object.entries(useSlots()).map(([key, value]) => {
+    return key;
+});
 
 const value = computed({
     get: () => props.context.value,
     set: (val) => props.context.node.input(val)
 })
 
-props.context.node.on("message-added", showErrorMessage);
-props.context.node.on("message-removed", showErrorMessage);
-props.context.node.on("message-updated", showErrorMessage);
-
 </script>
 <template>
     <q-option-group v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :type="context.optionType"
-        :error-message="errorMessage"></q-option-group>
+        :error-message="errorMessage">
+        <template v-for="s in ss" v-slot:[s]="props" :key="s">
+            <slot :name="s" v-bind="props ?? {}"></slot>
+        </template>
+    </q-option-group>
 </template>

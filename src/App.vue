@@ -22,9 +22,11 @@ const onSubmit = (data) => {
     <q-page-container>
       <q-page padding>
 
-        <FormKit type="q-input" label="Input1" name="input1" validation="required"></FormKit>
+        <FormKit type="q-input" label="Input1" name="input1" validation="required" outlined></FormKit>
 
-        <FormKit type="q-select" label="Select" name="select1" validation="required" :options="[
+        <FormKit type="q-select" label="Select" name="select1" validation="required" outlined
+        clearable
+         :options="[
           {label: 'Option 1', value: 'option1'},
           {label: 'Option 2', value: 'option2'},
           {label: 'Option 3', value: 'option3'},

@@ -1,7 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
 const props = defineProps({
-    modelValue: String,
     context: Object
 });
 
@@ -12,5 +11,7 @@ const value = computed({
 
 </script>
 <template>
-    <q-time v-model="value" v-bind="context.attrs"></q-time>
+    <q-time v-model="value" v-bind="context.attrs">
+        <slot></slot>
+    </q-time>
 </template>
