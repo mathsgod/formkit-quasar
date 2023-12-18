@@ -14,6 +14,11 @@ import TimeVue from './Time.vue';
 import BtnToggle from './BtnToggle.vue';
 import RatingVue from './Rating.vue';
 
+import registerErrorMessage from '../utils/registerErrorMessage';
+export {
+    registerErrorMessage
+};
+
 
 export const createQuasarPlugin = (): FormKitPlugin => {
 
