@@ -28,5 +28,6 @@
     "dist"
   ],
   "module": "./dist/formkit-quasar.js",
-  "license": "MIT"
+  "license": "MIT",
+  "types": "./dist/components/index.d.ts"
 }
