@@ -1,18 +1,12 @@
 <script setup>
-import registerErrorMessage from '../utils/registerErrorMessage';
-import { computed, ref, useSlots } from 'vue'
+import getErrorMessage from '../utils/getErrorMessage';
+import { computed, useSlots } from 'vue'
 const props = defineProps({
     context: Object
 });
 
-let error = ref(false);
-let errorMessage = ref(null);
-
-registerErrorMessage(props.context.node, error, errorMessage);
-
-const ss = Object.entries(useSlots()).map(([key, value]) => {
-    return key;
-});
+const { error, errorMessage } = getErrorMessage(props.context.node);
+const ss = Object.entries(useSlots()).map(([key]) => key);
 
 const value = computed({
     get: () => props.context.value,

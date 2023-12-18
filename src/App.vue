@@ -22,8 +22,12 @@ const onSubmit = (data) => {
     <q-page-container>
       <q-page padding>
 
-        <FormKit type="q-input" label="Input1" name="input1" validation="required" outlined></FormKit>
-        
+        <FormKit type="q-input" label="Input1" name="input1" validation="required" outlined>
+          <template v-slot:prepend>
+            <q-icon name="event" />
+          </template>
+        </FormKit>
+
         <FormKit type="q-input" label="Input" name="input2" validation="required">
           <template v-slot:prepend>
             <q-icon name="event" />
