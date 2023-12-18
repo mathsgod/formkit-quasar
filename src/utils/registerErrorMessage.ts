@@ -1,4 +1,5 @@
-export default (node: any, error: any, errorMessage: any) => {
+import { FormKitNode } from "@formkit/core"
+export default (node: FormKitNode, error: any, errorMessage: any) => {
 
     function showErrorMessage(msg: any) {
         if (msg.name == "message-updated") {
