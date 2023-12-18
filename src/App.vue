@@ -24,6 +24,12 @@ const onSubmit = (data) => {
 
         <FormKit type="text" label="Text" name="text1" validation="required"></FormKit>
 
+        <FormKit type="select" label="Select" name="select2" validation="required" :options="[
+          { label: 'Null', value: null },
+          { label: 'Option 1', value: 'option1' },
+          { label: 'Option 2', value: 'option2' },
+        ]" />
+
         <FormKit type="q-input" label="Input1" name="input1" validation="required" outlined></FormKit>
 
         <FormKit type="q-input" label="Input" name="input2" validation="required">
