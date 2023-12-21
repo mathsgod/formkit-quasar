@@ -24,9 +24,13 @@ const onSubmit = (data, form) => {
     <q-page-container>
       <q-page padding>
 
-        <FormKit type="form" @submit="onSubmit" :value="{ text1: 'a', text2: 'b' }" #default="{ state }">
+        <FormKit type="form" @submit="onSubmit" :value="{ text1: 'a', text2: 'b', editor1: '<p>hello</p>' }"
+          #default="{ state, value }">
           {{ state }}
 
+          {{ value }}
+
+          <FormKit type="q-editor" name="editor1"></FormKit>
           <FormKit type="q-input" label="Text" name="text1" validation="required"></FormKit>
           <FormKit type="text" label="Text2" name="text2" validation="required"></FormKit>
         </FormKit>

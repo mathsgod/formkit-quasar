@@ -13,6 +13,7 @@ import DateVue from './Date.vue';
 import TimeVue from './Time.vue';
 import BtnToggle from './BtnToggle.vue';
 import RatingVue from './Rating.vue';
+import EditorVue from './Editor.vue';
 
 export { default as registerErrorMessage } from '../utils/registerErrorMessage';
 export { default as getErrorMessage } from '../utils/getErrorMessage';
@@ -37,6 +38,12 @@ export const createQuasarPlugin = (): FormKitPlugin => {
                     type: "input",
                     component: Textarea
                 });
+            case "q-editor":
+                return node.define({
+                    type: "input",
+                    component: EditorVue
+                });
+
             case "q-select":
                 return node.define({
                     type: "input",
