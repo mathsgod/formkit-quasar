@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from "vue"
-
+import { reset } from "@formkit/vue"
 //load material icon from quasar extra
 import "@quasar/extras/material-icons/material-icons.css"
 //import "@quasar/extras/material-icons-outlined/material-icons-outlined.css"
@@ -10,8 +10,10 @@ const obj = reactive({
 
 })
 
-const onSubmit = (data) => {
+const onSubmit = (data, form) => {
   console.log(data)
+  reset(form, data);
+
 }
 
 </script>
@@ -22,8 +24,11 @@ const onSubmit = (data) => {
     <q-page-container>
       <q-page padding>
 
-        <FormKit type="form">
+        <FormKit type="form" @submit="onSubmit" :value="{ text1: 'a', text2: 'b' }" #default="{ state }">
+          {{ state }}
+
           <FormKit type="q-input" label="Text" name="text1" validation="required"></FormKit>
+          <FormKit type="text" label="Text2" name="text2" validation="required"></FormKit>
         </FormKit>
 
       </q-page>

@@ -4,6 +4,7 @@ import { getValidationMessages } from "@formkit/validation"
 export default (node: FormKitNode, error: any, errorMessage: any) => {
 
     function showErrorMessage(msg: any) {
+        console.log(msg);
         if (msg.name == "message-updated") {
             if (msg.payload.type == "validation") {
                 errorMessage.value = msg.payload.value;
@@ -15,6 +16,13 @@ export default (node: FormKitNode, error: any, errorMessage: any) => {
                 errorMessage.value = "";
                 error.value = false;
             }
+
+            
+            if (msg.payload.type == "state") {
+                error.value = false;
+            }
+
+            
         }
 
         if (msg.name == "message-added") {
