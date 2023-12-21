@@ -92,6 +92,8 @@ app.mount('#app')
 
 <FormKit type="q-color" label="Color" name="color1" />
 
+<FormKit type="q-editor" name="editor1" />
+
 <FormKit type="q-textarea" label="Textarea" name="textarea1" validation="required"></FormKit>
 
 
