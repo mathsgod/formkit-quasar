@@ -1,3 +1,21 @@
+import type { FormKitInputs } from "@formkit/inputs"
+
+type AllReals = number | string | boolean | CallableFunction | Array<any> | null | Record<any, any>;
+
+declare module '@formkit/inputs' {
+    interface FormKitInputProps<Props extends FormKitInputs<Props>> {
+        'q-input': {
+            type: 'q-input',
+            mask?: string,
+            inputType?: string,
+            value?: Props['number'] extends AllReals ? number | string : string;
+            number?: 'integer' | 'float' | 'true' | true;
+        }
+    }
+
+
+}
+
 import { FormKitPlugin } from '@formkit/core';
 import Input from './Input.vue'
 import Select from './Select.vue'

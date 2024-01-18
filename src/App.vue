@@ -22,14 +22,17 @@ const onSubmit = (data, form) => {
 <template>
   <q-layout>
     <q-page-container>
-      
-      <q-page padding>
-       
 
+      <q-page padding>
+
+
+        
         <FormKit type="form" @submit="onSubmit" :value="{ text1: 'a', text2: 'b', editor1: '<p>hello</p>' }"
           #default="{ state, value }">
 
-          <FormKit type="q-toggle" name="toggle1" :label="`Mode: ${value.toggle1}`" true-value="prod" false-value="dev"/>
+          <FormKit type="q-input" label="Text" name="text1" validation="required"></FormKit>
+
+          <FormKit type="q-toggle" name="toggle1" :label="`Mode: ${value.toggle1}`" true-value="prod" false-value="dev" />
           {{ state }}
 
           {{ value }}

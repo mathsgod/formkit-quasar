@@ -1,17 +1,20 @@
-<script setup>
-import { getValidationMessages } from '@formkit/validation';
+<script setup type="ts">
+
 import getErrorMessage from '../utils/getErrorMessage';
 import { computed, useSlots } from 'vue'
 const props = defineProps({
     context: Object
-});
+})
+
+//asserts props.context
+if (props.context === undefined) throw new Error('context is undefined')
 
 const { error, errorMessage } = getErrorMessage(props.context.node);
 const ss = Object.entries(useSlots()).map(([key]) => key);
 
 const value = computed({
-    get: () => props.context.value,
-    set: (val) => props.context.node.input(val)
+    get: () => props.context?.value,
+    set: (val) => props.context?.node.input(val)
 })
 
 
