@@ -11,8 +11,8 @@ const value = computed({
 
 </script>
 <template>
-    <q-slider v-model="value" v-bind="context.attrs" >
-        <template v-for="s in $slots" v-slot:[s]="props" :key="s">
+    <q-slider v-model="value" v-bind="context.attrs">
+        <template v-for="[s] in Object.entries($slots)" v-slot:[s]="props" :key="s">
             <slot :name="s" v-bind="props ?? {}"></slot>
         </template>
     </q-slider>

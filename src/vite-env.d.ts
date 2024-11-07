@@ -56,7 +56,19 @@ declare module '@formkit/inputs' {
     'q-slider': {
       type: 'q-slider'
     },
+    'q-range': {
+      type: 'q-range'
+    },
+    'q-rating': {
+      type: 'q-rating'
+    },
 
+  }
+
+  export interface FormKitInputSlots<Props extends FormKitInputs<Props>> {
+    'q-input': {
+      prepend: FormKitFrameworkContext
+    }
   }
 }
 

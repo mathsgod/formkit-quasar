@@ -24,12 +24,25 @@ const onSubmit = (data, form) => {
 
 
 
-        <form-kit type="form" :value="{}" #default="{ value }">
+        <form-kit type="form" :value="{
+          editor: 'Hello World',
+        }" #default="{ value }">
           {{ value }}
           <q-separator />
 
-          <form-kit type="q-input" name="text" label="Text" validation="required" sd="1" />
+          <form-kit type="q-input" name="text" label="Text" validation="required">
+            <template #prepend>
+              <q-icon name="event" />
+            </template>
+          </form-kit>
+
           <q-separator />
+
+          <form-kit type="q-editor" name="editor" label="Editor" />
+
+          <form-kit type="q-rating" name="rating" label="Rating" />
+
+          <form-kit type="q-range" name="range" label="Range" />
 
           <form-kit type="q-slider" name="slider" label="Slider" />
 

@@ -21,7 +21,7 @@ const value = computed({
 <template>
     <q-select v-model="value" :label="context.label" v-bind="context.attrs" :error="error"
         :error-message="errorMessage">
-        <template v-for="s in $slots" v-slot:[s]="props" :key="s">
+        <template v-for="[s] in Object.entries($slots)" v-slot:[s]="props" :key="s">
             <slot :name="s" v-bind="props ?? {}"></slot>
         </template>
     </q-select>
