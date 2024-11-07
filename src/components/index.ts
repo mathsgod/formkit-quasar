@@ -1,21 +1,3 @@
-import type { FormKitInputs } from "@formkit/inputs"
-
-type AllReals = number | string | boolean | CallableFunction | Array<any> | null | Record<any, any>;
-
-declare module '@formkit/inputs' {
-    interface FormKitInputProps<Props extends FormKitInputs<Props>> {
-        'q-input': {
-            type: 'q-input',
-            mask?: string,
-            inputType?: string,
-            value?: Props['number'] extends AllReals ? number | string : string;
-            number?: 'integer' | 'float' | 'true' | true;
-        }
-    }
-
-
-}
-
 import { FormKitPlugin } from '@formkit/core';
 import Input from './Input.vue'
 import Select from './Select.vue'
@@ -32,9 +14,12 @@ import TimeVue from './Time.vue';
 import BtnToggle from './BtnToggle.vue';
 import RatingVue from './Rating.vue';
 import EditorVue from './Editor.vue';
+import SliderVue from './Slider.vue';
 
 export { default as registerErrorMessage } from '../utils/registerErrorMessage';
 export { default as getErrorMessage } from '../utils/getErrorMessage';
+
+
 
 
 export const createQuasarPlugin = (): FormKitPlugin => {
@@ -117,12 +102,17 @@ export const createQuasarPlugin = (): FormKitPlugin => {
             case "q-btn-toggle":
                 return node.define({
                     type: "input",
-                    component: BtnToggle
+                    component: BtnToggle,
                 });
             case "q-rating":
                 return node.define({
                     type: "input",
                     component: RatingVue
+                });
+            case "q-slider":
+                return node.define({
+                    type: "input",
+                    component: SliderVue
                 });
 
 
