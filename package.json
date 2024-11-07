@@ -12,10 +12,10 @@
     "release": "npm version patch && npm run build && npm publish"
   },
   "dependencies": {
-    "@formkit/vue": "^1.4.0",
-    "@quasar/extras": "^1.16.9",
-    "quasar": "^2.14.1",
-    "vue": "^3.2.47"
+    "@formkit/vue": "^1.6.7",
+    "@quasar/extras": "^1.16.13",
+    "quasar": "^2.17.2",
+    "vue": "^3.5.12"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^1.8.0",
@@ -23,7 +23,7 @@
     "typescript": "^5.0.2",
     "vite": "^5.0.11",
     "vite-plugin-dts": "^3.6.4",
-    "vue-tsc": "^1.2.0"
+    "vue-tsc": "^2.1.10"
   },
   "files": [
     "dist"
