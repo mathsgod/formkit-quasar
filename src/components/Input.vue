@@ -24,8 +24,8 @@ const onBlur = () => {
 <template>
     <q-input v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :type="context.inputType"
         :error-message="errorMessage" @blur="onBlur">
-        <template v-for="[s] in Object.entries($slots)" v-slot:[s]="props" :key="s">
-            <slot :name="s" v-bind="props ?? {}"></slot>
+        <template v-for="name in Object.keys($slots)" #[name]="slotProps" :key="name">
+            <slot :name="name" v-bind="slotProps ?? {}"></slot>
         </template>
     </q-input>
 </template>
