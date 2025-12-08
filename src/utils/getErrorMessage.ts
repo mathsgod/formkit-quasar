@@ -1,11 +1,14 @@
-import { ref } from "vue";
-import registerErrorMessage from "./registerErrorMessage";
-import { FormKitNode } from "@formkit/core"
-export default (node: FormKitNode) => {
+import { ref, onScopeDispose } from "vue"
+import registerErrorMessage from "./registerErrorMessage"
+import type { FormKitNode } from "@formkit/core"
 
-    const error = ref(false);
-    const errorMessage = ref("");
-    registerErrorMessage(node, error, errorMessage);
+export default (node: FormKitNode) => {
+    const error = ref(false)
+    const errorMessage = ref("")
+    
+    const cleanup = registerErrorMessage(node, error, errorMessage)
+    onScopeDispose(cleanup)
+    
     return {
         error,
         errorMessage

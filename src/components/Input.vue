@@ -1,30 +1,28 @@
-<script setup type="ts">
+<script setup lang="ts">
+import getErrorMessage from '../utils/getErrorMessage'
+import type { FormKitFrameworkContext } from '@formkit/core'
+import { computed, useSlots } from 'vue'
 
-import getErrorMessage from '../utils/getErrorMessage';
-import { computed } from 'vue'
-const props = defineProps({
-    context: Object
-})
-const { error, errorMessage } = getErrorMessage(props.context.node);
+const props = defineProps<{
+    context: FormKitFrameworkContext
+}>()
+
+const slots = useSlots()
+const { error, errorMessage } = getErrorMessage(props.context.node)
 
 const value = computed({
     get: () => props.context?.value,
     set: (val) => props.context?.node.input(val)
 })
 
-
 const onBlur = () => {
-    if (errorMessage.value) {
-        error.value = true
-    } else {
-        error.value = false
-    }
+    error.value = !!errorMessage.value
 }
 </script>
 <template>
-    <q-input v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :type="context.inputType"
+    <q-input v-model="value" :label="context.label" v-bind="context.attrs" :error="error" :type="(context.inputType as 'text' | 'password' | 'textarea' | 'email' | 'search' | 'tel' | 'file' | 'url' | 'number' | 'date' | 'time' | 'datetime-local' | undefined)"
         :error-message="errorMessage" @blur="onBlur">
-        <template v-for="name in Object.keys($slots)" #[name]="slotProps" :key="name">
+        <template v-for="(_, name) in slots" #[name]="slotProps: any" :key="name">
             <slot :name="name" v-bind="slotProps ?? {}"></slot>
         </template>
     </q-input>

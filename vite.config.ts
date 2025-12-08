@@ -12,7 +12,11 @@ export default defineConfig({
         transformAssetUrls
       }
     }),
-    dts(),
+    dts({
+      tsconfigPath: './tsconfig.json',
+      rollupTypes: true,
+      logLevel: 'silent'
+    }),
     quasar()
   ],
   build: {
@@ -28,6 +32,13 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
         }
+      },
+      onwarn(warning, warn) {
+        // 忽略 "resolveComponent" unused import warning
+        if (warning.code === 'UNUSED_EXTERNAL_IMPORT' && warning.exporter === 'vue') {
+          return
+        }
+        warn(warning)
       }
     }
   }

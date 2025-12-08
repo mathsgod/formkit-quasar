@@ -1,14 +1,14 @@
-<script setup>
-import registerErrorMessage from '../utils/registerErrorMessage';
-import { computed, ref } from 'vue'
-const props = defineProps({
-    context: Object
-});
+<script setup lang="ts">
+import getErrorMessage from '../utils/getErrorMessage'
+import type { FormKitFrameworkContext } from '@formkit/core'
+import { computed, useSlots } from 'vue'
 
-let error = ref(false);
-let errorMessage = ref(null);
+const props = defineProps<{
+    context: FormKitFrameworkContext
+}>()
 
-registerErrorMessage(props.context.node, error, errorMessage);
+const slots = useSlots()
+const { error, errorMessage } = getErrorMessage(props.context.node)
 
 const value = computed({
     get: () => props.context.value,
@@ -17,9 +17,9 @@ const value = computed({
 </script>
 <template>
     <q-option-group v-model="value" :label="context.label" v-bind="context.attrs" :error="error"
-        :type="context.optionType" :error-message="errorMessage">
-        <template v-for="[s] in Object.entries($slots)" v-slot:[s]="props" :key="s">
-            <slot :name="s" v-bind="props ?? {}"></slot>
+        :type="(context.optionType as 'radio' | 'checkbox' | 'toggle' | undefined)" :error-message="errorMessage">
+        <template v-for="(_, name) in slots" #[name]="slotProps: any" :key="name">
+            <slot :name="name" v-bind="slotProps ?? {}"></slot>
         </template>
     </q-option-group>
 </template>

@@ -1,20 +1,22 @@
-<script setup>
-import { computed, ref } from 'vue'
-const props = defineProps({
-    context: Object
-});
+<script setup lang="ts">
+import type { FormKitFrameworkContext } from '@formkit/core'
+import { computed, useSlots } from 'vue'
+
+const props = defineProps<{
+    context: FormKitFrameworkContext
+}>()
+
+const slots = useSlots()
 
 const value = computed({
     get: () => props.context.value,
     set: (val) => props.context.node.input(val)
 })
-
-
 </script>
 <template>
     <q-range v-model="value" v-bind="context.attrs">
-        <template v-for="[s] in Object.entries($slots)" v-slot:[s]="props" :key="s">
-            <slot :name="s" v-bind="props ?? {}"></slot>
+        <template v-for="(_, name) in slots" #[name]="slotProps: any" :key="name">
+            <slot :name="name" v-bind="slotProps ?? {}"></slot>
         </template>
     </q-range>
 </template>
