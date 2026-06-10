@@ -5,6 +5,10 @@
   "type": "module",
   "homepage": "https://github.com/mathsgod/formkit-quasar",
   "description": "Formkit components for Quasar",
+  "repository": {
+    "type": "git",
+    "url": "mathsgod/formkit-quasar"
+  },
   "scripts": {
     "dev": "vite -c vite.docs.config.ts",
     "docs:dev": "vite -c vite.docs.config.ts",
