@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
+        
+      - name: Update npm to latest
+        run: npm install -g npm@latest
 
       - run: npm ci
 
@@ -27,5 +30,3 @@ jobs:
 
       - name: Publish to NPM
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
