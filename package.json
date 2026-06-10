@@ -1,7 +1,7 @@
 {
   "name": "formkit-quasar",
   "private": false,
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "homepage": "https://github.com/mathsgod/formkit-quasar",
   "description": "Formkit components for Quasar",
