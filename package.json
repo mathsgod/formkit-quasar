@@ -26,6 +26,7 @@
   "devDependencies": {
     "@quasar/vite-plugin": "^1.8.0",
     "@vitejs/plugin-vue": "^6.0.2",
+    "netlify-cli": "^26.1.0",
     "typescript": "^5.0.2",
     "vite": "^7.2.7",
     "vite-plugin-dts": "^4.5.4",
