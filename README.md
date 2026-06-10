@@ -8,6 +8,8 @@ Most components are based on Quasar; non-FormKit-specific attributes are passed 
 
 See the [`docs/`](./docs) folder for a per-component usage guide covering every supported input type with live examples.
 
+Live docs: **https://formkit-quasar.netlify.app/**
+
 Run the docs site locally:
 
 ```bash
@@ -20,7 +22,7 @@ Build a static copy of the docs:
 npm run docs:build
 ```
 
-The output is written to `docs-dist/`.
+The output is written to `docs-dist/`. The docs site is automatically deployed to Netlify on every push to `main` via `.github/workflows/deploy-docs.yml`.
 
 ## Installation
 
