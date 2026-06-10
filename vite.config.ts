@@ -27,15 +27,23 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', '@formkit/vue', 'quasar', "@quasar/extras", "@formkit/validation"],
+      external: [
+        'vue',
+        '@formkit/vue',
+        '@formkit/core',
+        '@formkit/validation',
+        'quasar',
+        '@quasar/extras'
+      ],
       output: {
         globals: {
-          vue: 'Vue',
+          vue: 'Vue'
         }
       },
       onwarn(warning, warn) {
-        // 忽略 "resolveComponent" unused import warning
-        if (warning.code === 'UNUSED_EXTERNAL_IMPORT' && warning.exporter === 'vue') {
+        // Vue compiler injects `resolveComponent` imports that rollup can't see as used.
+        // Safe to ignore — Vue handles this at runtime.
+        if (warning.code === 'UNUSED_EXTERNAL_IMPORT' && warning.exporter === 'vue' && warning.names?.includes('resolveComponent')) {
           return
         }
         warn(warning)

@@ -6,8 +6,10 @@
   "homepage": "https://github.com/mathsgod/formkit-quasar",
   "description": "Formkit components for Quasar",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite -c vite.docs.config.ts",
+    "docs:dev": "vite -c vite.docs.config.ts",
     "build": "vue-tsc && vite build",
+    "docs:build": "vite build -c vite.docs.config.ts",
     "preview": "vite preview",
     "release": "npm version patch && npm run build && npm publish"
   },
@@ -17,12 +19,17 @@
     "quasar": "^2.17.2",
     "vue": "^3.5.12"
   },
+  "peerDependencies": {
+    "@formkit/core": "^1.6.9",
+    "@formkit/validation": "^1.6.9"
+  },
   "devDependencies": {
     "@quasar/vite-plugin": "^1.8.0",
     "@vitejs/plugin-vue": "^6.0.2",
     "typescript": "^5.0.2",
     "vite": "^7.2.7",
     "vite-plugin-dts": "^4.5.4",
+    "vue-router": "^4.6.4",
     "vue-tsc": "^3.1.7"
   },
   "files": [
