@@ -25,8 +25,7 @@ jobs:
       - name: Build library
         run: npm run build
 
-      - name: Verify npm auth
-        run: npm whoami
-
       - name: Publish to NPM
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
