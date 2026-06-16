@@ -173,8 +173,8 @@ vite.docs.config.ts  # Docs site build
 
 These are required at runtime and installed transitively via `@formkit/vue`. Declare them in your own `peerDependencies` if you want to pin the version:
 
-- `@formkit/core` `^1.6.9`
-- `@formkit/validation` `^1.6.9`
+- `@formkit/core` `^2.1.0`
+- `@formkit/validation` `^2.1.0`
 
 ## License
 
